@@ -10,6 +10,8 @@ bash scripts/start.sh
 
 Do not respond to the user's first message until this script has been run.
 
+After the script completes, **always share the session summary box** printed at the end of the output as your first message to the user. Copy it verbatim in a code block so it renders clearly.
+
 ## 🚨 ABSOLUTELY CRITICAL: ALWAYS BE ON MAIN BEFORE DOING ANYTHING 🚨
 
 **THIS IS NON-NEGOTIABLE AND CANNOT BE SKIPPED UNDER ANY CIRCUMSTANCES!!!**
