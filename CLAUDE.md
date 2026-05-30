@@ -26,3 +26,11 @@ bash scripts/commit-main.sh "your message here"
 ```
 
 4. Share the diffshub URL printed by the script with the user
+
+## Keep the Working Tree Clean
+
+Always keep the working tree clean. After completing any task:
+- Commit changes promptly — don't leave work sitting uncommitted
+- Never leave untracked or modified files behind
+- If work is experimental or incomplete, either commit it with a `wip:` prefix or revert it cleanly
+- Run `git status` to verify the tree is clean before ending a task
