@@ -7,4 +7,6 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL https://opencode.ai/install | bash
+RUN curl -fsSL https://opencode.ai/install | bash && \
+    mv /root/.opencode/bin/opencode /usr/local/bin/opencode && \
+    chmod 755 /usr/local/bin/opencode
