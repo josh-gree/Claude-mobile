@@ -19,3 +19,5 @@ fi
 
 echo "- **[$TIMESTAMP]** ($BRANCH) $1" >> "$NOTES_FILE"
 echo "Note saved to $NOTES_FILE"
+
+bash scripts/commit-main.sh "chore: add session note"
