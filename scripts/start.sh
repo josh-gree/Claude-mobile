@@ -16,6 +16,21 @@ else
     DOPPLER_STATUS="ready $(doppler --version)"
 fi
 
+# Install e2b CLI if missing
+if ! command -v e2b &> /dev/null; then
+    npm install -g @e2b/cli > /dev/null 2>&1
+fi
+
+# Authenticate e2b CLI with API key from Doppler
+E2B_API_KEY=$(doppler secrets get E2B_API_KEY --project claude-mobilr --config dev --plain 2>/dev/null)
+if [ -n "$E2B_API_KEY" ]; then
+    mkdir -p ~/.e2b
+    echo "{\"teamApiKey\":\"$E2B_API_KEY\"}" > ~/.e2b/config.json
+    E2B_STATUS="authenticated"
+else
+    E2B_STATUS="FAILED (no key in Doppler)"
+fi
+
 if ! docker info > /dev/null 2>&1; then
     dockerd > /tmp/dockerd.log 2>&1 &
     echo "Waiting for Docker daemon..."
@@ -43,6 +58,7 @@ echo "╠═══════════════════════�
 printf "║  %-20s %-31s ║\n" "Branch:"  "$(git branch --show-current)"
 printf "║  %-20s %-31s ║\n" "Git:"     "$(git status --short | wc -l | xargs -I{} echo '{} uncommitted files' | sed 's/^0 uncommitted files/clean/')"
 printf "║  %-20s %-31s ║\n" "Doppler:" "$DOPPLER_STATUS"
+printf "║  %-20s %-31s ║\n" "E2B:"     "$E2B_STATUS"
 printf "║  %-20s %-31s ║\n" "Docker:"  "$DOCKER_STATUS"
 echo "╠══════════════════════════════════════════════════════╣"
 echo "║  Recent commits:                                     ║"
