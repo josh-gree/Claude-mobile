@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Use E2B + opencode to explore the sandbox environment and write a markdown report."""
 
+import os
 import re
 import sys
 from e2b import Sandbox
@@ -29,8 +30,12 @@ echo "=== NETWORK ===" && curl -s -o /dev/null -w "HTTP %{http_code} to google.c
 
 
 def main() -> None:
+    envs = {}
+    if key := os.environ.get("OPENROUTER_API_KEY"):
+        envs["OPENROUTER_API_KEY"] = key
+
     print(f"Creating sandbox from template: {TEMPLATE}")
-    with Sandbox.create(TEMPLATE) as sandbox:
+    with Sandbox.create(TEMPLATE, envs=envs or None) as sandbox:
         print(f"Sandbox ID: {sandbox.sandbox_id}\n")
 
         # Gather environment data directly
