@@ -78,6 +78,16 @@ doppler run --project claude-mobilr --config dev -- <your command>
 
 # Get a single secret value
 doppler secrets get SECRET_NAME --project claude-mobilr --config dev --plain
+
+# Set a single secret
+doppler secrets set SECRET_NAME 'value' --project claude-mobilr --config dev
+
+# Set multiple secrets at once
+doppler secrets set KEY1='value1' KEY2='value2' --project claude-mobilr --config dev
+
+# Set a multiline secret (e.g. a certificate) via stdin
+echo 'multiline
+value' | doppler secrets set SECRET_NAME --project claude-mobilr --config dev
 ```
 
 ### Setup (already done per session — no action needed)
