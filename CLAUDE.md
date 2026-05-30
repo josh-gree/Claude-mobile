@@ -18,9 +18,19 @@ IMPORTANT: Always use `scripts/commit-main.sh` to commit and push. Never commit 
 bash scripts/commit-main.sh
 ```
 
+```bash
+bash scripts/commit-main.sh "your commit message here"
+```
+
 This script:
 - Ensures you are on `main`
 - Stages all changes (`git add -A`)
-- Auto-generates a good commit message using Claude
 - Commits and pushes to `main`
-- Prints a diffshub URL — always share this URL with the user after every commit
+- Prints a diffshub URL
+
+### Commit message rules
+Before running the script, generate the commit message yourself from `git diff --staged`:
+- Use conventional commit style (`feat:`, `fix:`, `chore:`, `docs:` etc.)
+- First line max 72 chars, present tense
+- Add a short body after a blank line if the change needs explanation
+- Always share the diffshub URL printed by the script with the user
