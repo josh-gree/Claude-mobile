@@ -37,3 +37,6 @@ set +o allexport
 
 echo "[setup] Done — secrets written to .env and exported to current shell."
 echo "[setup] For subsequent commands use: doppler run -- <command>"
+
+echo "[setup] Running connectivity tests..."
+doppler run -- uv run pytest tests/ -v
