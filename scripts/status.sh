@@ -32,8 +32,7 @@ fi
 
 echo ""
 echo -e "${BOLD}Recent commits:${RESET}"
-git log --oneline --no-walk --since="7 days ago" -8 2>/dev/null || true
-git log --oneline -5
+git log --oneline -8
 
 # Notes file if it exists
 if [ -f "NOTES.md" ]; then
