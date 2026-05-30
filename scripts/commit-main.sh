@@ -19,7 +19,7 @@ fi
 
 # Generate commit message from staged diff using Claude
 echo "Generating commit message..."
-COMMIT_MSG=$(git diff --staged | claude -p "Write a concise git commit message for this diff. Follow conventional commit style. First line: short summary (max 72 chars). Optionally a blank line then a short body if needed. Output ONLY the commit message, nothing else.")
+COMMIT_MSG=$(git diff --staged | claude --output-format text -p "You are generating a git commit message. Write a concise commit message for the following diff. Use conventional commit style (feat/fix/chore/docs etc). First line max 72 chars. Optional short body after a blank line. Output ONLY the raw commit message text with no explanation, no markdown, no quotes.")
 
 echo ""
 echo "Commit message:"
