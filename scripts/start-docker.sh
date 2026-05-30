@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# Ensure we're on main and up to date before any work
+echo "Switching to main and pulling latest..."
+git checkout main && git pull origin main
+echo "On branch: $(git branch --show-current)"
+
 if ! docker info > /dev/null 2>&1; then
     dockerd > /tmp/dockerd.log 2>&1 &
     echo "Waiting for Docker daemon..."
