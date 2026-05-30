@@ -23,12 +23,17 @@ else
 fi
 
 # Set project/config scope
-doppler configure set project "$DOPPLER_PROJECT" config "$DOPPLER_CONFIG" --scope /
+doppler configure set project="$DOPPLER_PROJECT" config="$DOPPLER_CONFIG" --scope /
 
-# Export secrets into the current shell (effective only when sourced)
+# Download secrets
 echo "[setup] Loading secrets from Doppler ($DOPPLER_PROJECT/$DOPPLER_CONFIG)..."
+doppler secrets download --no-file --format env > .env
+
+# Export into the current shell (effective only when sourced)
 set -o allexport
-eval "$(doppler secrets download --no-file --format env)"
+# shellcheck disable=SC1091
+source .env
 set +o allexport
 
-echo "[setup] Done — environment variables loaded."
+echo "[setup] Done — secrets written to .env and exported to current shell."
+echo "[setup] For subsequent commands use: doppler run -- <command>"
