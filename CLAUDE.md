@@ -43,6 +43,47 @@ bash scripts/commit-main.sh "your message here"
 
 4. Share the diffshub URL printed by the script with the user
 
+## Doppler — Secret Management
+
+This project uses **Doppler** to manage secrets and environment variables. Never hardcode secrets, API keys, or credentials in code or config files — always use Doppler.
+
+### Why Doppler
+
+Secrets committed to git are a security liability. Doppler keeps them out of the repo, provides per-environment values, and lets secrets be rotated without code changes.
+
+### Project & Configs
+
+- **Doppler project:** `claude-mobilr`
+- **Configs (environments):** `dev`, `dev_personal`, `stg`, `prd`
+
+Use `dev` for local development. `dev_personal` is for personal overrides. `stg` and `prd` are staging and production respectively.
+
+### When to Use Doppler
+
+- Any time you need an API key, token, password, or other secret — fetch it from Doppler, don't invent or hardcode it.
+- When running the app locally, inject secrets via `doppler run --`.
+- When adding a new secret the app needs, add it to Doppler first, then reference it by name in code.
+
+### Common Commands
+
+```bash
+# Check auth status
+doppler me
+
+# List secrets in the dev config
+doppler secrets --project claude-mobilr --config dev
+
+# Run a command with secrets injected as env vars
+doppler run --project claude-mobilr --config dev -- <your command>
+
+# Get a single secret value
+doppler secrets get SECRET_NAME --project claude-mobilr --config dev --plain
+```
+
+### Setup (already done per session — no action needed)
+
+`scripts/start.sh` installs the Doppler CLI at session start. Auth is handled via a personal token that is injected into the container environment automatically.
+
 ## Keep the Working Tree Clean
 
 Always keep the working tree clean. After completing any task:
