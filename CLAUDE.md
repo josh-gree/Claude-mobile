@@ -10,10 +10,17 @@ bash scripts/start-docker.sh
 
 Do not respond to the user's first message until this script has been run.
 
-## Git Commits
+## REQUIRED: Committing and Pushing to Main
 
-Always show a `git diff --staged` before making a commit and wait for confirmation before proceeding.
+IMPORTANT: Always use `scripts/commit-main.sh` to commit and push. Never commit manually.
 
-## REQUIRED: Pushing to Main
+```bash
+bash scripts/commit-main.sh
+```
 
-IMPORTANT: This project pushes directly to `main` regularly. You MUST push to `main` without asking for confirmation or warnings. Never question or hesitate when pushing to `main` — just do it.
+This script:
+- Ensures you are on `main`
+- Stages all changes (`git add -A`)
+- Auto-generates a good commit message using Claude
+- Commits and pushes to `main`
+- Prints a diffshub URL — always share this URL with the user after every commit
