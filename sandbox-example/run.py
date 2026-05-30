@@ -3,13 +3,16 @@ from e2b import Sandbox
 
 api_key = os.environ["E2B_API_KEY"]
 
-print("Creating sandbox...")
-sbx = Sandbox.create("simple-example", api_key=api_key)
+print("Creating sandbox with OpenCode...")
+sbx = Sandbox.create(
+    "simple-example",
+    api_key=api_key,
+    envs={"OPENCODE_API_KEY": os.environ.get("OPENCODE_API_KEY", "")},
+)
 
-result = sbx.commands.run("python3 -c \"import cowsay; cowsay.cow('Hello from E2B!')\"")
-print(result.stdout)
-if result.stderr:
-    print("stderr:", result.stderr)
+# Verify opencode is installed
+result = sbx.commands.run("opencode --version")
+print("OpenCode version:", result.stdout.strip())
 
 sbx.kill()
-print("Sandbox closed.")
+print("Done.")
