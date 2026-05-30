@@ -37,6 +37,38 @@ E2B sandboxes running opencode in isolated Ubuntu environments.
 ### Running Scripts
 
 ```bash
-uv run python scripts/run_sandbox.py
+uv run python scripts/run_sandbox.py                  # runs `opencode --version` by default
+uv run python scripts/run_sandbox.py "opencode --help" # pass any shell command as an argument
 uv run python scripts/explore_sandbox.py
+```
+
+To run any script with secrets loaded (without re-sourcing setup.sh):
+
+```bash
+doppler run -- uv run python scripts/run_sandbox.py
+```
+
+### Running Tests
+
+```bash
+doppler run -- uv run pytest tests/ -v
+```
+
+Tests in `tests/test_connectivity.py` verify live access to OpenRouter and E2B — they require secrets to be loaded.
+
+### Required Secrets (managed via Doppler)
+
+| Secret | Used by |
+|---|---|
+| `OPENROUTER_API_KEY` | OpenRouter API calls in tests and opencode |
+| `E2B_API_KEY` | E2B sandbox creation |
+
+### E2B Sandbox Template
+
+The sandbox image is defined in `e2b.Dockerfile` (Ubuntu 22.04 + opencode). Template name: `opencode-ubuntu`.
+
+To rebuild and publish the template after changing `e2b.Dockerfile`:
+
+```bash
+doppler run -- e2b template build
 ```
