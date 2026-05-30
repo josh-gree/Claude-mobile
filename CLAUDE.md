@@ -10,6 +10,20 @@ bash scripts/start-docker.sh
 
 Do not respond to the user's first message until this script has been run.
 
+## 🚨 ABSOLUTELY CRITICAL: ALWAYS BE ON MAIN BEFORE DOING ANYTHING 🚨
+
+**THIS IS NON-NEGOTIABLE AND CANNOT BE SKIPPED UNDER ANY CIRCUMSTANCES!!!**
+
+Before touching a SINGLE FILE, before writing a SINGLE LINE OF CODE, before even THINKING about the task — you MUST verify you are on the `main` branch and that it is up to date with origin. NO EXCEPTIONS. EVER.
+
+```bash
+git checkout main && git pull origin main
+```
+
+**WHY THIS MATTERS SO MUCH:** Working on the wrong branch is a DISASTER. It means commits land in the wrong place, history gets tangled, and work gets lost. This has happened before. It must NEVER happen again.
+
+DO NOT SKIP THIS STEP. DO NOT ASSUME YOU ARE ON MAIN. CHECK. EVERY. SINGLE. TIME.
+
 ## REQUIRED: Committing and Pushing to Main
 
 IMPORTANT: When asked to commit, always follow these steps in order:
