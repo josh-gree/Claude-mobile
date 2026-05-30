@@ -36,6 +36,6 @@ All traffic is routed through a proxy (`CLAUDE_CODE_PROXY_RESOLVES_HOSTS=true`).
 | General internet (google.com, example.com, etc.) | Allowed |
 
 ### Docker
-The Docker daemon is not started automatically (no systemd). Start it via `scripts/start-docker.sh`.
+The Docker daemon is not started automatically (no systemd). Start it via `scripts/start.sh`.
 
 Pulling images from Docker Hub is supported in the full environment.
