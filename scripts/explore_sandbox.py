@@ -3,12 +3,13 @@
 
 import os
 import re
+import shlex
 import sys
 from e2b import Sandbox
 from e2b.exceptions import FileNotFoundException
 
 TEMPLATE = "opencode-ubuntu"
-MODEL = "opencode/deepseek-v4-flash-free"
+MODEL = "openrouter/deepseek/deepseek-v4-flash"
 REPORT_PATH = "/home/user/environment-report.md"
 
 ANSI_ESCAPE = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
@@ -52,7 +53,7 @@ def main() -> None:
 
         print("\nAsking opencode to write the report...")
         result = sandbox.commands.run(
-            f'opencode run --model {MODEL} "{prompt}"',
+            f'opencode run --model {MODEL} {shlex.quote(prompt)}',
             timeout=120,
             on_stdout=lambda x: print(strip_ansi(x), end="", flush=True),
             on_stderr=lambda x: print(strip_ansi(x), end="", file=sys.stderr, flush=True),
