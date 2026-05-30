@@ -32,14 +32,10 @@ All traffic is routed through a proxy (`CLAUDE_CODE_PROXY_RESOLVES_HOSTS=true`).
 | pypi.org | Allowed |
 | registry.npmjs.org | Allowed |
 | GitHub (via MCP tools / local git proxy) | Allowed |
-| Docker Hub (cloudfront.docker.com) | Blocked |
-| General internet (google.com, example.com, etc.) | Blocked |
+| Docker Hub (cloudfront.docker.com) | Allowed |
+| General internet (google.com, example.com, etc.) | Allowed |
 
 ### Docker
-The Docker daemon is not started automatically (no systemd). Start it manually:
+The Docker daemon is not started automatically (no systemd). Start it via `scripts/start-docker.sh`.
 
-```bash
-dockerd > /tmp/dockerd.log 2>&1 &
-```
-
-Pulling images from Docker Hub is blocked by the network policy. Images must be built locally from a `Dockerfile`. A `FROM scratch` image with a statically compiled binary was confirmed working.
+Pulling images from Docker Hub is supported in the full environment.
